@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  selenium:
+    image: selenium/standalone-chrome:latest
+    platform: linux/amd64
+    container_name: incharge-selenium
+    shm_size: 2gb
+    environment:
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
+      - SE_VNC_NO_PASSWORD=1
+      - SE_SCREEN_WIDTH=1920
+      - SE_SCREEN_HEIGHT=1080
+      - SE_NODE_MAX_SESSIONS=3
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+
+  tests:
+    build:
+      context: .
+    container_name: incharge-tests
+    depends_on:
+      - selenium
+    environment:
+      - SELENIUM_GRID_URL=http://selenium:4444/wd/hub
+      - HEADLESS=true
+    volumes:
+      - ./build:/app/build

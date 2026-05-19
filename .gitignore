@@ -1,0 +1,23 @@
+# Gradle build output
+build/
+.gradle/
+out/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+.vscode/
+*.classpath
+*.project
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Selenium screenshots (generated on failure)
+build/screenshots/
+
+# Test results
+bin/
